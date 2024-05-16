@@ -9,6 +9,11 @@ string connectionString =
 
 builder.Services.AddTransient<RepositoryPersonajes>();
 
+builder.Services.AddCors( p => p.AddPolicy("corsenabled", options =>
+{
+    options.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+}));
+
 builder.Services.AddDbContext<PersonajesContext>
  (options => options.UseMySql
     (connectionString, ServerVersion.AutoDetect(connectionString) 
@@ -43,6 +48,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("corsenabled");
 
 app.UseAuthorization();
 
