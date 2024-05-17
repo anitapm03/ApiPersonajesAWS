@@ -39,5 +39,14 @@ namespace ApiPersonajesAWS.Controllers
                 (personaje.Nombre, personaje.Imagen);
             return Ok();
         }
+
+        [HttpPut]
+        public async Task<ActionResult> EditarPersonaje
+            (Personaje personaje)
+        {
+             this.repo.EditarPersonaje
+                (personaje.IdPersonaje, personaje.Nombre, personaje.Imagen);
+            return Ok();
+        }
     }
 }
